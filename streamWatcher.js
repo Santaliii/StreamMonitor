@@ -28,7 +28,7 @@ const getLivestreamInfo = async streamer => {
 const openWhenLive = streamer => {
 
     console.log(`Monitoring live status of ${streamer}`);
-    const FIVE_MINUTES_IN_MILLISECONDS = 1000
+    const FIVE_MINUTES_IN_MILLISECONDS = 300000
     let justWentLive = false
 
     // Check live status of streamer every 5 minutes
@@ -59,6 +59,6 @@ const openWhenLive = streamer => {
 const isStreamerLive = livestreamInfo => (livestreamInfo.data.length !== 0)
 
 
-
-let parasocialFriend = "the_happy_hobb"
+// ENTER THE TWITCH STREAMER'S DISPLAY NAME BETWEEN THE QUOTES BELOW
+let parasocialFriend = ""
 openWhenLive(parasocialFriend)
