@@ -56,9 +56,16 @@ const openWhenLive = streamer => {
 }
 
 // Check the first element of the returned JSON ('data' array). If it's empty, then the stream is offline.
-const isStreamerLive = livestreamInfo => (livestreamInfo.data.length !== 0)
+const isStreamerLive = (livestreamInfo) => {
+    try {
+        return livestreamInfo.data.length !== 0
+    } catch (err) {
+        console.error("Invalid twitch username.")
+        process.exit(1)
+    }
+}
 
 
-// ENTER THE TWITCH STREAMER'S DISPLAY NAME BETWEEN THE QUOTES BELOW
-let parasocialFriend = ""
+// ENTER THE TWITCH STREAMER'S DISPLAY NAME BETWEEN THE QUOTES BELOW, DO NOT LEAVE EMPTY 
+let parasocialFriend = "TwitchDev"
 openWhenLive(parasocialFriend)
