@@ -23,7 +23,7 @@ const getLivestreamInfo = async streamer => {
         const livestreamInfo = await response.json()
         return livestreamInfo
     } catch (err) {
-        console.error("API request failed.");
+        console.error("API request failed. Trying again...");
     }
 
 }
@@ -31,7 +31,8 @@ const getLivestreamInfo = async streamer => {
 const openWhenLive = streamers => {
 
     console.log(`Monitoring live status of ${streamers}`);
-    const FIVE_MINUTES_IN_MILLISECONDS = 1000
+    // CHANGE TO DESIRED INTERVAL TIME AT WHICH TO CHECK LIVE STATUS
+    const FIVE_MINUTES_IN_MILLISECONDS = 300000
     let justWentLive = false
 
     // Check live status of streamer every 5 minutes
