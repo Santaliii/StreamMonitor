@@ -1,6 +1,4 @@
-// Fetch API for HTTP requests
 import fetch from "node-fetch"
-// Package to open website on browser
 import open from "open"
 import 'dotenv/config'
 
@@ -17,13 +15,11 @@ const getLivestreamInfo = async streamer => {
 
             // App token - Increases rate limit (num of requests per minute)
             'Authorization': `Bearer ${TWITCH_APP_TOKEN}`,
-            // Developer client ID
             'Client-ID': `${CLIENT_ID}`
         }
     })
 
 
-    // Livestream information in JSON format.
     const livestreamInfo = await response.json()
     return livestreamInfo
 
@@ -40,6 +36,7 @@ const openWhenLive = streamer => {
 
         const livestreamInfo = await getLivestreamInfo(streamer)
 
+        // Only open the stream in the browser if it was offline during the last check.
         if (isStreamerLive(livestreamInfo)) {
 
             if (!justWentLive) {
@@ -58,7 +55,8 @@ const openWhenLive = streamer => {
 
 }
 
-const isStreamerLive = streamer => (streamer.data.length !== 0)
+// Check the first element of the returned JSON ('data' array). If it's empty, then the stream is offline.
+const isStreamerLive = livestreamInfo => (livestreamInfo.data.length !== 0)
 
 
 
