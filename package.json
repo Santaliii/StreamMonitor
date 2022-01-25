@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start-forever": "forever start -m 1 streamWatcher.js"
+        "start-forever": "forever start -m 2 streamWatcher.js"
     },
     "author": "",
     "license": "ISC",
