@@ -17,3 +17,8 @@ Once you've gotten a hold of your own client_id key and app token, move on to th
 
 `` git clone https://github.com/Santaliii/StreamMonitor (desired name) ``
 
+2. Run the following commands in the cloned project
+
+`` npm install ``, to install all required dependencies.
+
+
