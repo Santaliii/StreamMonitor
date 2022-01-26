@@ -7,7 +7,7 @@ const CLIENT_ID = process.env.CLIENT_ID
     // ENTER ANY AMOUNT OF STREAMERS (THEIR TWITCH DISPLAY NAME) IN THE ARRAY BELOW FOLLOWING THE SAME SHOWN FORMAT.
     // ** ONLY ENTER NON-EMPTY STRINGS IN THE twitchUsername FIELD, ALWAYS SET THE justWentLive ATTRIBUTE TO 0
 const streamers = [{
-        twitchUsername: 'the_happy_hobb',
+        twitchUsername: 'the_happy_hob',
         justWentLive: 0
     },
     {
