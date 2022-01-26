@@ -5,7 +5,20 @@ import 'dotenv/config'
 const TWITCH_APP_TOKEN = process.env.TWITCH_APP_TOKEN
 const CLIENT_ID = process.env.CLIENT_ID
     // ENTER ANY AMOUNT OF STREAMERS (THEIR TWITCH DISPLAY NAME) IN THE ARRAY BELOW FOLLOWING THE SAME SHOWN FORMAT.
-const streamers = ['the_happy_hobb', 'zoil', 'pokelawls']
+    // ** ONLY ENTER NON-EMPTY STRINGS IN THE twitchUsername FIELD, ALWAYS SET THE justWentLive ATTRIBUTE TO 0
+const streamers = [{
+        twitchUsername: 'the_happy_hobb',
+        justWentLive: 0
+    },
+    {
+        twitchUsername: 'zoil',
+        justWentLive: 0
+    },
+    {
+        twitchUsername: 'pokelawls',
+        justWentLive: 0
+    }
+]
 
 const getLivestreamInfo = async streamer => {
 
@@ -30,10 +43,9 @@ const getLivestreamInfo = async streamer => {
 
 const openWhenLive = streamers => {
 
-    console.log(`Monitoring live status of ${streamers}`);
+    console.log(`Monitoring live status of ${JSON.stringify(streamers)}`);
     // CHANGE TO DESIRED INTERVAL TIME AT WHICH TO CHECK LIVE STATUS
-    const FIVE_MINUTES_IN_MILLISECONDS = 300000
-    let justWentLive = false
+    const FIVE_MINUTES_IN_MILLISECONDS = 5000
 
     // Check live status of streamer every 5 minutes
     const interval = setInterval(async() => {
@@ -41,23 +53,22 @@ const openWhenLive = streamers => {
 
         for (let i = 0; i < streamers.length; i++) {
 
-            const livestreamInfo = await getLivestreamInfo(streamers[i])
-            console.log(livestreamInfo);
+            const livestreamInfo = await getLivestreamInfo(streamers[i].twitchUsername)
 
             // Only open the stream in the browser if it was offline during the last check.
             if (isStreamerLive(livestreamInfo)) {
 
-                if (!justWentLive) {
-                    open(`https://twitch.tv/${streamers[i]}`)
-                    console.log(`Live now, detected @ ( ${new Date()} )`)
-                    justWentLive = true
+                if (!streamers[i].justWentLive) {
+                    open(`https://twitch.tv/${streamers[i].twitchUsername}`)
+                    console.log(`${streamers[i].twitchUsername} is live now @ ( ${new Date().toDateString()} )\n`)
+                    streamers[i].justWentLive = true
                 } else {
-                    console.log(`Streaming session is still ongoing @ ( ${new Date()} )`)
+                    console.log(`${streamers[i].twitchUsername} is still streaming @ ( ${new Date()} )\n`)
                 }
 
             } else {
-                justWentLive = false
-                console.log(`Current time is ( ${new Date()} ), ${streamers[i]} is offline :(`)
+                streamers[i].justWentLive = false
+                console.log(`Current time is ( ${new Date()} ), ${streamers[i].twitchUsername} is offline :(\n`)
             }
 
         }
@@ -74,7 +85,7 @@ const isStreamerLive = livestreamInfo => livestreamInfo.data.length !== 0
 const validateUsernames = streamers => {
     try {
         for (let i = 0; i < streamers.length; i++) {
-            if (streamers[i].length === 0 || typeof streamers[i] !== "string") {
+            if (streamers[i].twitchUsername.length === 0 || typeof streamers[i].twitchUsername !== "string") {
                 throw new Error("Twitch username is either empty or of the wrong type. Exiting...")
             }
         }
