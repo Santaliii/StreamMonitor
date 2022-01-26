@@ -52,7 +52,7 @@ const getLivestreamInfo = async streamer => {
 const openWhenLive = streamers => {
 
     // CHANGE TO DESIRED INTERVAL TIME AT WHICH TO CHECK LIVE STATUS
-    const FIVE_MINUTES_IN_MILLISECONDS = 1000
+    const INTERVAL_TIME_IN_MILLSECONDS = 300000
 
     // Check live status of streamer every 5 minutes
     const interval = setInterval(async() => {
@@ -78,7 +78,7 @@ const openWhenLive = streamers => {
 
         }
 
-    }, FIVE_MINUTES_IN_MILLISECONDS)
+    }, INTERVAL_TIME_IN_MILLSECONDS)
 
 }
 
