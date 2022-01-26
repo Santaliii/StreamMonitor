@@ -116,11 +116,13 @@ The program does not automatically restart after a system reboot. To run it agai
 2. Navigate to the directory where streamWatcher.js is located
 3. Run the command `` npm run start-forever ``
 
-## Additional info
+## Additional info/Troubleshooting
 
 - If you close a stream that the program opened, it will not open it again until the stream goes offline for at least `` INTERVAL_TIME_IN_MILLSECONDS ``
 
-- If the forever process fails twice (Most likely caused by an invalid ``twitchUsername`` entry), it will be terminated and must be launched again. 
+- If the forever process fails twice (Most likely caused by an invalid ``twitchUsername`` entry), it will be terminated and must be launched again.
+
+- If you wish to add/delete streamers, you must edit the streamWatcher.js as such and run a new forever process. (Do not forget to terminate any pre-existing ones) 
 
 
 
