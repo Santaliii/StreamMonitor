@@ -5,14 +5,14 @@ Checks if a specified stream(s) is live or not every 5 minutes.
 
 ## Prerequisites
 
-You must have the following installed on your machine before trying to run this program locally:
+You must have the following installed on your machine before running this program locally:
 
 1. nodeJS runtime environment
 2. npm
 3. git
-4. forever npm package
+4. forever npm package (installation instructions below)
 
-### What to do before running this on your machine.
+## What to do before running this on your machine.
 
 Firstly, you want to get your own Twitch API client_id key and app token. To do so, follow the instructions provided in the link below:
 
@@ -119,6 +119,8 @@ The program does not automatically restart after a system reboot. To run it agai
 ## Additional info
 
 - If you close a stream that the program opened, it will not open it again until the stream goes offline for at least `` INTERVAL_TIME_IN_MILLSECONDS ``
+
+- If the forever process fails twice (Most likely caused by an invalid ``twitchUsername`` entry), it will be terminated and must be launched again. 
 
 
 
