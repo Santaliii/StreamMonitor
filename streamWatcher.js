@@ -17,6 +17,14 @@ const streamers = [{
     {
         twitchUsername: 'pokelawls',
         justWentLive: 0
+    },
+    {
+        twitchUsername: 'xqcow',
+        justWentLive: 0
+    },
+    {
+        twitchUsername: 'dinossindgeil',
+        justWentLive: 0
     }
 ]
 
@@ -43,9 +51,8 @@ const getLivestreamInfo = async streamer => {
 
 const openWhenLive = streamers => {
 
-    console.log(`Monitoring live status of ${JSON.stringify(streamers)}`);
     // CHANGE TO DESIRED INTERVAL TIME AT WHICH TO CHECK LIVE STATUS
-    const FIVE_MINUTES_IN_MILLISECONDS = 5000
+    const FIVE_MINUTES_IN_MILLISECONDS = 1000
 
     // Check live status of streamer every 5 minutes
     const interval = setInterval(async() => {
@@ -60,15 +67,13 @@ const openWhenLive = streamers => {
 
                 if (!streamers[i].justWentLive) {
                     open(`https://twitch.tv/${streamers[i].twitchUsername}`)
-                    console.log(`${streamers[i].twitchUsername} is live now @ ( ${new Date().toDateString()} )\n`)
+                    const now = new Date()
+                    console.log(`${formatDate(now)} ${streamers[i].twitchUsername} is live.\n`)
                     streamers[i].justWentLive = true
-                } else {
-                    console.log(`${streamers[i].twitchUsername} is still streaming @ ( ${new Date()} )\n`)
                 }
 
             } else {
                 streamers[i].justWentLive = false
-                console.log(`Current time is ( ${new Date()} ), ${streamers[i].twitchUsername} is offline :(\n`)
             }
 
         }
@@ -94,6 +99,8 @@ const validateUsernames = streamers => {
         process.exit(1)
     }
 }
+
+const formatDate = date => date.toUTCString().substring(5, date.toUTCString().length - 3)
 
 validateUsernames(streamers)
 openWhenLive(streamers)
