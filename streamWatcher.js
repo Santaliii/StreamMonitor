@@ -100,7 +100,7 @@ const validateUsernames = streamers => {
     }
 }
 
-const formatDate = date => date.toUTCString().substring(5, date.toUTCString().length - 3)
+const formatDate = date => date.toUTCString().substring(5, date.toUTCString().length - 3).replace(/ /g, '')
 
 validateUsernames(streamers)
 openWhenLive(streamers)
