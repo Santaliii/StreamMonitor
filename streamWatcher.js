@@ -11,11 +11,7 @@ const streamers = [{
         justWentLive: 0
     },
     {
-        twitchUsername: 'zoil',
-        justWentLive: 0
-    },
-    {
-        twitchUsername: 'pokelawls',
+        twitchUsername: 'dinossindgeil',
         justWentLive: 0
     },
     {
@@ -23,7 +19,11 @@ const streamers = [{
         justWentLive: 0
     },
     {
-        twitchUsername: 'dinossindgeil',
+        twitchUsername: 'zoil',
+        justWentLive: 0
+    },
+    {
+        twitchUsername: 'pokelawls',
         justWentLive: 0
     }
 ]

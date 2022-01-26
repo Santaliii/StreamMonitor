@@ -7,8 +7,10 @@ Checks if a specified stream(s) is live or not every 5 minutes.
 
 You must have the following installed on your machine before trying to run this program locally:
 
-1. NodeJS runtime environment
+1. nodeJS runtime environment
 2. npm
+3. git
+4. forever npm package
 
 ### What to do before running this on your machine.
 
@@ -29,16 +31,20 @@ Once you've gotten a hold of your own client_id key and app token, move on to th
 
 `` npm install ``, to install all required dependencies.
 
-3. Create new file and name it .env , then add your previously given app token and client_id in the following format:
+3. Install the forever npm package (important for permanently running this process in the background)
+
+`` npm install forever -g ``
+
+4. Create new file and name it .env , then add your previously given app token and client_id in the following format:
 
 ```
 TWITCH_APP_TOKEN=YOUR-APP-TOKEN
 CLIENT_ID=YOUR-CLIENT-ID
 ```
 
-4. Edit the streamWatcher.js file to your preferences as specified by the all-uppercase comments in the file. Editable parameters are:
+5. Edit the streamWatcher.js file to your preferences as specified by the all-uppercase comments in the file. Editable parameters are:
 
-- The ``streamers`` array of objects, follow the specified format shown below:
+- The ``streamers`` array of objects. Follow the specified format shown below:
 
 *Before adding your streamer(s)*
 
@@ -54,7 +60,7 @@ const streamers = [{
 ]
 ```
 
-*After adding*
+*After adding* ~ (justWentLive attribute should always be zero)
 
 ```js
 const streamers = [{
@@ -80,19 +86,15 @@ const streamers = [{
 const INTERVAL_TIME_IN_MILLSECONDS = 300000 // 300000 = 5 Minutes
 ```
 
-5. Finally, in the cloned project folder, run the program as a permanent background service (using the forever npm package) by issuing the following commands:
+6. Finally, in the cloned project folder, run the program as a permanent background service (using the forever npm package) by issuing the following command:
 
-`` forever start streamWatcher.js `` - to start a permanent background process <br>
+`` npm run start-forever `` - to start a permanent background process <br>
 
 After that, you can close your dev environment while the process runs in the background permanently
 
 ## How to kill/view information about forever tasks
 
-To be able to view and manipulate forever processes from anywhere within your system using a CLI, you must install the package globally by executing the following command:
-
-`` npm install forever -g ``
-
-After which you can view currently running forever processes using:
+You can view currently running forever processes using:
 
 `` forever list `` 
 
@@ -106,8 +108,21 @@ For more information or troubleshooting regarding forever, refer to their docume
 
 - https://github.com/foreversd/forever
 
+## How to run after a system reboot
 
-## Additional 
+The program does not automatically restart after a system reboot. To run it again:
+
+1. Open a CLI
+2. Navigate to the directory where streamWatcher.js is located
+3. Run the command `` npm run start-forever ``
+
+## Additional info
+
+- If you close a stream that the program opened, it will not open it again until the stream goes offline for at least `` INTERVAL_TIME_IN_MILLSECONDS ``
+
+
+
+
 
 
 
